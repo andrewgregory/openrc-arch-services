@@ -1,0 +1,28 @@
+#!/sbin/runscript
+
+command=/usr/sbin/NetworkManager
+description="manages network connections"
+
+extra_started_commands="wake sleep"
+description_wake=""
+description_sleep=""
+
+depend() {
+    need dbus
+}
+
+sleep() {
+    /usr/bin/dbus-send --system \
+        --dest=org.freedesktop.NetworkManager \
+        --type=method_call \
+        /org/freedesktop/NetworkManager \
+        org.freedesktop.NetworkManager.sleep
+}
+
+wake() {
+    /usr/bin/dbus-send --system \
+        --dest=org.freedesktop.NetworkManager \
+        --type=method_call \
+        /org/freedesktop/NetworkManager \
+        org.freedesktop.NetworkManager.wake
+}
