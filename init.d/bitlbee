@@ -1,0 +1,6 @@
+#!/sbin/runscript
+
+description="Brings instant messaging (XMPP, MSN, Yahoo!, AIM, ICQ, Twitter) to IRC"
+pidfile=/run/bitlbee/bitlbee.pid
+command=bitlbee
+command_args="-F"
