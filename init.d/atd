@@ -1,0 +1,9 @@
+#!/sbin/runscript
+
+pidfile=/run/atd.pid
+command=/usr/sbin/atd
+command_args="$ATD_OPTS"
+
+depend() {
+    need clock logger
+}

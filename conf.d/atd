@@ -1,0 +1,2 @@
+# atd options (see atd(8))
+ATD_OPTS=''
