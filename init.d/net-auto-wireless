@@ -1,0 +1,17 @@
+#!/sbin/runscript
+
+depend()
+{
+    need localmount
+    after bootmisc
+    use logger
+    provide net
+}
+
+start() {
+    /usr/bin/netcfg-wpa_actiond $IFACE
+}
+
+stop() {
+    /usr/bin/netcfg-wpa_actiond stop $IFACE
+}
