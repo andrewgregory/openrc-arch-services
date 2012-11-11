@@ -1,6 +1,25 @@
 #!/sbin/runscript
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License, v2 or later
 
-description="Brings instant messaging (XMPP, MSN, Yahoo!, AIM, ICQ, Twitter) to IRC"
-pidfile=/run/bitlbee/bitlbee.pid
-command=bitlbee
-command_args="-F"
+DAEMON=/usr/sbin/bitlbee
+PIDFILE=/run/bitlbee/bitlbee.pid
+
+depend() {
+	need logger net
+}
+
+start () {
+	ebegin "Starting bitlbee"
+	start-stop-daemon --start --quiet \
+		-u bitlbee:bitlbee  --exec ${DAEMON} -- -P ${PIDFILE} \
+		${BITLBEE_OPTS}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping bitlbee"
+	start-stop-daemon --stop --quiet --pidfile ${PIDFILE}
+	eend $?
+}
+

@@ -1,14 +1,14 @@
 #!/sbin/runscript
 
-description="Remove /var/run/nologin created by systemd tmpfiles.d"
+description="Remove /run/nologin created by systemd tmpfiles.d"
 
 depend() {
 	after tmpfilesd.boot
 }
 
 start() {
-	if [[ -f /var/run/nologin ]]; then
-		rm -f /var/run/nologin
+	if [ -f /run/nologin ]; then
+		rm -f /run/nologin
 		return $?
 	else
 		return 0
