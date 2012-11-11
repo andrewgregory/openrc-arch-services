@@ -36,25 +36,25 @@ start() {
 	checkconfig || return 1
 	ebegin "Starting syslog-ng"
 	[ -n "${SYSLOG_NG_OPTS}" ] && SYSLOG_NG_OPTS="-- ${SYSLOG_NG_OPTS}"
-	start-stop-daemon --start --pidfile /var/run/syslog-ng.pid --exec /usr/sbin/syslog-ng ${SYSLOG_NG_OPTS}
+	start-stop-daemon --start --pidfile /run/syslog-ng.pid --exec /usr/sbin/syslog-ng ${SYSLOG_NG_OPTS}
 	eend $? "Failed to start syslog-ng"
 }
 
 stop() {
 	ebegin "Stopping syslog-ng"
-	start-stop-daemon --stop --pidfile /var/run/syslog-ng.pid
+	start-stop-daemon --stop --pidfile /run/syslog-ng.pid
 	eend $? "Failed to stop syslog-ng"
 	sleep 1 # needed for syslog-ng to stop in case we're restarting
 }
 
 reload() {
-	if [ ! -f /var/run/syslog-ng.pid ]; then
+	if [ ! -f /run/syslog-ng.pid ]; then
 		eerror "syslog-ng isn't running"
 		return 1
 	fi
 	checkconfig || return 1
 	ebegin "Reloading configuration and re-opening log files"
 	start-stop-daemon --signal HUP \
-	    --pidfile /var/run/syslog-ng.pid
+	    --pidfile /run/syslog-ng.pid
 	eend $?
 }
