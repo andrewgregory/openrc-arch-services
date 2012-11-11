@@ -1,7 +1,6 @@
 #!/sbin/runscript
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/syslog-ng/files/syslog-ng.rc6.3,v 1.5 2011/12/04 09:53:39 swegener Exp $
 
 extra_commands="checkconfig"
 extra_started_commands="reload"
