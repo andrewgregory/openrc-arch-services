@@ -1,0 +1,19 @@
+#!/sbin/runscript
+
+command=/usr/bin/ntpd
+pidfile=/run/ntpd.pid
+command_args="$NTPD_OPTS"
+
+depend() {
+    use net dns logger
+    after ntp-client
+}
+
+start_pre() {
+    if [ ! -f /etc/ntp.conf ]; then
+        eerror "Missing /etc/ntp.conf"
+        eerror "See ntpd.conf(5)"
+        return 1
+    fi
+    return 0
+}

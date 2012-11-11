@@ -1,0 +1,2 @@
+# ntpd options (see ntpd(1))
+NTPD_OPTS="-g -u ntp:ntp"
