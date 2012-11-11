@@ -1,0 +1,8 @@
+#!/sbin/runscript
+
+command=/usr/sbin/bluetoothd
+
+depend() {
+    after coldplug
+    need dbus localmount hostname
+}
