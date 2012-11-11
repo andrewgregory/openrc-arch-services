@@ -7,7 +7,7 @@ depend() {
 }
 
 start() {
-	if [[ -f /var/run/nologin ]]; then
+	if [ -f /var/run/nologin ]; then
 		rm -f /var/run/nologin
 		return $?
 	else
