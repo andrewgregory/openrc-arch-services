@@ -5,45 +5,45 @@
 extra_started_commands="reload"
 
 depend() {
-	need localmount
-	after bootmisc
+    need localmount
+    after bootmisc
 }
 
 start() {
-	ebegin "Starting D-BUS system messagebus"
-	/usr/bin/dbus-uuidgen --ensure=/etc/machine-id
+    ebegin "Starting D-BUS system messagebus"
+    /usr/bin/dbus-uuidgen --ensure=/etc/machine-id
 
-	# We need to test if /run/dbus exists, since script will fail if it does not
-	[ ! -e /run/dbus ] && mkdir /run/dbus
+    # We need to test if /run/dbus exists, since script will fail if it does not
+    [ ! -e /run/dbus ] && mkdir /run/dbus
 
-	start-stop-daemon --start --pidfile /run/dbus.pid --exec /usr/bin/dbus-daemon -- --system
-	eend $?
+    start-stop-daemon --start --pidfile /run/dbus.pid --exec /usr/bin/dbus-daemon -- --system
+    eend $?
 }
 
 stop() {
-	local retval
+    local retval
 
-	ebegin "Stopping D-BUS system messagebus"
+    ebegin "Stopping D-BUS system messagebus"
 
-	start-stop-daemon --stop --pidfile /run/dbus.pid
-	retval=$?
+    start-stop-daemon --stop --pidfile /run/dbus.pid
+    retval=$?
 
-	eend ${retval}
+    eend ${retval}
 
-	[ -S /run/dbus/system_bus_socket ] && rm -f /run/dbus/system_bus_socket
+    [ -S /run/dbus/system_bus_socket ] && rm -f /run/dbus/system_bus_socket
 
-	return ${retval}
+    return ${retval}
 }
 
 reload() {
-	local retval
+    local retval
 
-	ebegin "Reloading D-BUS messagebus config"
+    ebegin "Reloading D-BUS messagebus config"
 
-	/usr/bin/dbus-send --print-reply --system --type=method_call \
-			--dest=org.freedesktop.DBus \
-			/ org.freedesktop.DBus.ReloadConfig > /dev/null
-	retval=$?
-	eend ${retval}
-	return ${retval}
+    /usr/bin/dbus-send --print-reply --system --type=method_call \
+            --dest=org.freedesktop.DBus \
+            / org.freedesktop.DBus.ReloadConfig > /dev/null
+    retval=$?
+    eend ${retval}
+    return ${retval}
 }

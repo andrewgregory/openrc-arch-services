@@ -3,14 +3,14 @@
 description="Remove /run/nologin created by systemd tmpfiles.d"
 
 depend() {
-	after tmpfilesd.boot
+    after tmpfilesd.boot
 }
 
 start() {
-	if [ -f /run/nologin ]; then
-		rm -f /run/nologin
-		return $?
-	else
-		return 0
-	fi
+    if [ -f /run/nologin ]; then
+        rm -f /run/nologin
+        return $?
+    else
+        return 0
+    fi
 }

@@ -6,55 +6,55 @@ extra_commands="checkconfig"
 extra_started_commands="reload"
 
 depend() {
-	# Make networking dependency conditional on configuration
-	case $(sed 's/#.*//' /etc/syslog-ng/syslog-ng.conf) in
-		*source*tcp*|*source*udp*|*destination*tcp*|*destination*udp*)
-			need net
-			use stunnel ;;
-	esac
+    # Make networking dependency conditional on configuration
+    case $(sed 's/#.*//' /etc/syslog-ng/syslog-ng.conf) in
+        *source*tcp*|*source*udp*|*destination*tcp*|*destination*udp*)
+            need net
+            use stunnel ;;
+    esac
 
-	config /etc/syslog-ng/syslog-ng.conf
-	use clock
-	need hostname localmount
-	provide logger
+    config /etc/syslog-ng/syslog-ng.conf
+    use clock
+    need hostname localmount
+    provide logger
 }
 
 checkconfig() {
-	if [ ! -e /etc/syslog-ng/syslog-ng.conf ] ; then
-		eerror "You need to create /etc/syslog-ng/syslog-ng.conf first."
-		eerror "An example can be found in /etc/syslog-ng/syslog-ng.conf.sample"
-		return 1
-	fi
-	syslog-ng -s -f /etc/syslog-ng/syslog-ng.conf
+    if [ ! -e /etc/syslog-ng/syslog-ng.conf ] ; then
+        eerror "You need to create /etc/syslog-ng/syslog-ng.conf first."
+        eerror "An example can be found in /etc/syslog-ng/syslog-ng.conf.sample"
+        return 1
+    fi
+    syslog-ng -s -f /etc/syslog-ng/syslog-ng.conf
 
-	# the start and reload functions have their own eends so
-	# avoid calling this twice when there are no problems
-	[ $? -eq 0 ] || eend $? "Configuration error. Please fix your configfile (/etc/syslog-ng/syslog-ng.conf)"
+    # the start and reload functions have their own eends so
+    # avoid calling this twice when there are no problems
+    [ $? -eq 0 ] || eend $? "Configuration error. Please fix your configfile (/etc/syslog-ng/syslog-ng.conf)"
 }
 
 start() {
-	checkconfig || return 1
-	ebegin "Starting syslog-ng"
-	[ -n "${SYSLOG_NG_OPTS}" ] && SYSLOG_NG_OPTS="-- ${SYSLOG_NG_OPTS}"
-	start-stop-daemon --start --pidfile /run/syslog-ng.pid --exec /usr/sbin/syslog-ng ${SYSLOG_NG_OPTS}
-	eend $? "Failed to start syslog-ng"
+    checkconfig || return 1
+    ebegin "Starting syslog-ng"
+    [ -n "${SYSLOG_NG_OPTS}" ] && SYSLOG_NG_OPTS="-- ${SYSLOG_NG_OPTS}"
+    start-stop-daemon --start --pidfile /run/syslog-ng.pid --exec /usr/sbin/syslog-ng ${SYSLOG_NG_OPTS}
+    eend $? "Failed to start syslog-ng"
 }
 
 stop() {
-	ebegin "Stopping syslog-ng"
-	start-stop-daemon --stop --pidfile /run/syslog-ng.pid
-	eend $? "Failed to stop syslog-ng"
-	sleep 1 # needed for syslog-ng to stop in case we're restarting
+    ebegin "Stopping syslog-ng"
+    start-stop-daemon --stop --pidfile /run/syslog-ng.pid
+    eend $? "Failed to stop syslog-ng"
+    sleep 1 # needed for syslog-ng to stop in case we're restarting
 }
 
 reload() {
-	if [ ! -f /run/syslog-ng.pid ]; then
-		eerror "syslog-ng isn't running"
-		return 1
-	fi
-	checkconfig || return 1
-	ebegin "Reloading configuration and re-opening log files"
-	start-stop-daemon --signal HUP \
-	    --pidfile /run/syslog-ng.pid
-	eend $?
+    if [ ! -f /run/syslog-ng.pid ]; then
+        eerror "syslog-ng isn't running"
+        return 1
+    fi
+    checkconfig || return 1
+    ebegin "Reloading configuration and re-opening log files"
+    start-stop-daemon --signal HUP \
+        --pidfile /run/syslog-ng.pid
+    eend $?
 }
