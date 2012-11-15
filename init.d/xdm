@@ -50,7 +50,7 @@ depend() {
 	after bootmisc consolefont modules netmount
 	after readahead-list ypbind autofs openvpn gpm lircmd
 	after quota keymaps
-	before alsasound
+	before alsa
 
 	# Start before X
 	use consolekit dbus xfs
