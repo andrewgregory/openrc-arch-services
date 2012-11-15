@@ -13,4 +13,4 @@ install:
 	install -d "${INITDIR}" "${CONFDIR}"
 	install -m 755 -t "${INITDIR}" ${INIT_FILES}
 	install -m 644 -t "${CONFDIR}" ${CONF_FILES}
-	install -m 755 -t "${XTDIR}" ${X_FILES}
+	install -m 755 -t "${XDIR}" ${X_FILES}
