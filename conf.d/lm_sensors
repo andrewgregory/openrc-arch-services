@@ -12,7 +12,7 @@ LOADMODULES=yes
 # Initialize sensors at startup
 INITSENSORS=yes
 
-#HWMON_MODULES=""
+#HWMON_MODULES="coretemp"
 
 # For compatibility reasons, modules are also listed individually as variables
 #    MODULE_0, MODULE_1, MODULE_2, etc.
@@ -21,4 +21,6 @@ INITSENSORS=yes
 # rest of the modules. Use MODULE_X_ARGS for arguments.
 #
 # You should use BUS_MODULES and HWMON_MODULES instead if possible.
+
+#MODULE_0=coretemp
 
