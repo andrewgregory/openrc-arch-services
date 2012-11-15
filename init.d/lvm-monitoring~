@@ -12,8 +12,8 @@ depend() {
 	need lvm dmeventd
 }
 
-VGCHANGE=/usr/sbin/vgchange
-VGS=/usr/sbin/vgs
+VGCHANGE=/sbin/vgchange
+VGS=/sbin/vgs
 
 start() {
 	ret=0
