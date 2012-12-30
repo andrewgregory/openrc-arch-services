@@ -1,0 +1,19 @@
+#!/sbin/runscript
+
+description="Start netcfg with a specific profile"
+
+depend()
+{
+    need localmount
+    after bootmisc
+    use logger
+    provide net
+}
+
+start() {
+    /usr/bin/netcfg up $NETPROFILE
+}
+
+stop() {
+    /usr/bin/netcfg down $NETPROFILE
+}
