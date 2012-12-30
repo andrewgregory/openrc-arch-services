@@ -5,10 +5,10 @@
 
 VSFTPD_NAME=${SVCNAME##*.}
 if [ -n "${VSFTPD_NAME}" -a "${SVCNAME}" != "vsftpd" ]; then
-    VSFTPD_PID="/var/run/vsftpd.${VSFTPD_NAME}.pid"
+    VSFTPD_PID="/run/vsftpd.${VSFTPD_NAME}.pid"
     VSFTPD_CONF_DEFAULT="/etc/${VSFTPD_NAME}.conf"
 else
-    VSFTPD_PID="/var/run/vsftpd.pid"
+    VSFTPD_PID="/run/vsftpd.pid"
     VSFTPD_CONF_DEFAULT="/etc/vsftpd.conf"
 fi
 VSFTPD_CONF=${VSFTPD_CONF:-${VSFTPD_CONF_DEFAULT}}
