@@ -1,3 +1,0 @@
-# net-profile
-# replace ethernet-static with the profile of your choosing
-NETPROFILE=ethernet-static
