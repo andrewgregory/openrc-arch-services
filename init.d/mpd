@@ -1,0 +1,16 @@
+#!/sbin/runscript
+
+command="/usr/bin/mpd"
+description="Music Player Daemon"
+
+depend()
+{
+    need localmount
+    use net
+}
+
+stop() {
+    ebegin "Stopping mpd"
+    $command --kill
+    eend $?
+}
