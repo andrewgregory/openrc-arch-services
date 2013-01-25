@@ -1,0 +1,16 @@
+#!/sbin/runscript
+
+name="transmissiond"
+description="Transmission daemon"
+command="/usr/bin/transmission-daemon"
+command_args="-f $TRANSMISSION_ARGS"
+command_background="yes"
+start_stop_daemon_args="--user ${TRANSMISSION_USER:-transmission}"
+pidfile="/run/$name.pid"
+
+depend()
+{
+    need localmount
+    use net
+}
+
