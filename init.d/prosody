@@ -1,0 +1,41 @@
+#!/sbin/runscript
+
+description="Prosody is a lightweight Jabber/XMPP server written in Lua."
+description_reload="Reload configuration and reopen log files."
+extra_started_commands="reload"
+pidfile="/run/prosody/prosody.pid"
+
+STARTCOMMAND="/usr/bin/prosodyctl start"
+STOPCOMMAND="/usr/bin/prosodyctl stop"
+
+depend() {
+    need net
+    use dns
+}
+
+checkconfig() {
+    if [ ! -e /etc/prosody/prosody.cfg.lua ] ; then
+        eerror "Missing configuration file /etc/prosody/prosody.cfg.lua"
+        return 1
+    fi
+}
+
+start() {
+    checkconfig || return 1
+    ebegin "Starting Prosody XMPP Server"
+    ${STARTCOMMAND} > /dev/null 2>&1
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping Prosody XMPP Server"
+    ${STOPCOMMAND} > /dev/null 2>&1
+    eend $?
+}
+
+reload() {
+    checkconfig || return 1
+    ebegin "Restarting Prosody XMPP Server"
+    start-stop-daemon --pidfile ${pidfile} --signal HUP > /dev/null 2>&1
+    eend $?
+}
