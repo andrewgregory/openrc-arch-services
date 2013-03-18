@@ -1,0 +1,13 @@
+#!/sbin/runscript
+
+name="mysqld"
+description="MySQL Server"
+command="/usr/bin/mysqld_safe --user=mysql"
+command_background="yes"
+extra_started_commands="/usr/bin/mysqld-post"
+pidfile="/var/lib/mysql/$HOSTNAME.pid"
+
+depend() {
+    use net.lo
+    need localmount
+}
