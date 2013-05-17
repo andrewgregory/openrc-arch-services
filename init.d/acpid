@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 extra_started_commands="reload"
-command="/usr/sbin/acpid"
+command="/usr/bin/acpid"
 command_args="${ACPID_ARGS}"
 start_stop_daemon_args="--quiet"
 description="Daemon for Advanced Configuration and Power Interface"

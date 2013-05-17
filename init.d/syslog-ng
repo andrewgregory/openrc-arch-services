@@ -36,7 +36,7 @@ start() {
     checkconfig || return 1
     ebegin "Starting syslog-ng"
     [ -n "${SYSLOG_NG_OPTS}" ] && SYSLOG_NG_OPTS="-- ${SYSLOG_NG_OPTS}"
-    start-stop-daemon --start --pidfile /run/syslog-ng.pid --exec /usr/sbin/syslog-ng ${SYSLOG_NG_OPTS}
+    start-stop-daemon --start --pidfile /run/syslog-ng.pid --exec /usr/bin/syslog-ng ${SYSLOG_NG_OPTS}
     eend $? "Failed to start syslog-ng"
 }
 
