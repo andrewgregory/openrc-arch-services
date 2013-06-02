@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!@SBINDIR@/runscript
 
 name="transmissiond"
 description="Transmission daemon"

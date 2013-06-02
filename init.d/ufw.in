@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!@SBINDIR@/runscript
 
 depend() {
     before net

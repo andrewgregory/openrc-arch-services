@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!@SBINDIR@/runscript
 
 command=/usr/sbin/NetworkManager
 description="manages network connections"
