@@ -1,4 +1,4 @@
-#!@SBINDIR@/runscript
+#!@RUNSCRIPT@
 
 command="/usr/bin/mpd"
 description="Music Player Daemon"

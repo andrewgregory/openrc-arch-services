@@ -1,4 +1,4 @@
-#!@SBINDIR@/runscript
+#!@RUNSCRIPT@
 # Copyright 1999-2011 Roy Marples <roy@marples.name>
 # All rights reserved. Released under the 2-clause BSD license.
 

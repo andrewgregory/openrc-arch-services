@@ -9,10 +9,13 @@ SBINDIR    ?= ${PREFIX}/sbin
 INITDIR = ${DESTDIR}/${SYSCONFDIR}/init.d
 CONFDIR = ${DESTDIR}/${SYSCONFDIR}/conf.d
 
+RUNSCRIPT ?= runscript
+
 all: ${INIT_FILES} ${CONF_FILES}
 
 %: %.in
 	sed -e 's:@SBINDIR@:${SBINDIR}:g' $< > $@
+	sed -e 's:@RUNSCRIPT@:${SBINDIR}/${RUNSCRIPT}:g' $< > $@
 
 install: ${INIT_FILES}
 	install -d "${INITDIR}" "${CONFDIR}"

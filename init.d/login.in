@@ -1,4 +1,4 @@
-#!@SBINDIR@/runscript
+#!@RUNSCRIPT@
 
 description="Remove /run/nologin created by systemd tmpfiles.d"
 

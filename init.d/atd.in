@@ -1,4 +1,4 @@
-#!@SBINDIR@/runscript
+#!@RUNSCRIPT@
 
 pidfile=/run/atd.pid
 command=/usr/sbin/atd
