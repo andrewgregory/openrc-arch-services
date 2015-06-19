@@ -11,16 +11,16 @@ depend() {
 start() {
 	ebegin "Starting ConsoleKit daemon"
 
-	checkpath -q -d -m 0755 /var/run/ConsoleKit
+	checkpath -q -d -m 0755 /run/ConsoleKit
 
 	start-stop-daemon --start -q \
-		--pidfile /var/run/ConsoleKit/pid \
-		--exec /usr/sbin/console-kit-daemon -- 
+		--pidfile /run/ConsoleKit/pid \
+		--exec /usr/bin/console-kit-daemon -- 
 	eend $?
 }
 
 stop() {
 	ebegin "Stopping ConsoleKit daemon"
-	start-stop-daemon --stop -q --pidfile /var/run/ConsoleKit/pid 
+	start-stop-daemon --stop -q --pidfile /run/ConsoleKit/pid 
 	eend $?
 }
